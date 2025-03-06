@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 
+// models/Todo.js
 const todoSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: true,
+        minLength: [3, 'Title must be at least 3 characters'],
+        maxLength: [100, 'Title cannot exceed 100 characters'],
+        trim: true
     },
     completed: {
         type: Boolean,
@@ -11,7 +15,8 @@ const todoSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        immutable: true
     }
 });
 
