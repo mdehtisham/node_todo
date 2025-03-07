@@ -10,6 +10,33 @@ exports.getAllTodos = async (req, res) => {
     }
 };
 
+exports.deleteMultipleTodos = async (req, res) => {
+    try {
+        const { ids } = req.body;
+
+        const result = await Todo.deleteMany({
+            _id: { $in: ids }
+        });
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'No todos found to delete'
+            });
+        }
+
+        res.json({
+            success: true,
+            message: `Deleted ${result.deletedCount} todos`
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: 'Server error during bulk deletion'
+        });
+    }
+};
+
 // Create new todo
 exports.createTodo = async (req, res) => {
     const { title } = req.body;

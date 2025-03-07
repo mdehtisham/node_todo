@@ -23,7 +23,19 @@ const updateTodoSchema = Joi.object({
     completed: Joi.boolean()
 }).min(1); // At least one field to update
 
+const deleteMultipleSchema = Joi.object({
+    ids: Joi.array()
+        .items(Joi.string().pattern(/^[0-9a-fA-F]{24}$/))
+        .required()
+        .messages({
+            'array.base': 'IDs must be an array',
+            'array.empty': 'At least one ID is required',
+            'string.pattern.base': 'Invalid ID format'
+        })
+});
+
 module.exports = {
     createTodoSchema,
-    updateTodoSchema
+    updateTodoSchema,
+    deleteMultipleSchema
 };

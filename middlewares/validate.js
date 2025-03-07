@@ -1,4 +1,4 @@
-const { createTodoSchema, updateTodoSchema } = require('../validators/todo.validator');
+const { createTodoSchema, updateTodoSchema, deleteMultipleSchema } = require('../validators/todo.validator');
 
 const validate = (schema) => async (req, res, next) => {
     try {
@@ -19,5 +19,6 @@ const validate = (schema) => async (req, res, next) => {
 
 module.exports = {
     validateCreateTodo: validate(createTodoSchema),
-    validateUpdateTodo: validate(updateTodoSchema)
+    validateUpdateTodo: validate(updateTodoSchema),
+    validateDeleteMultiple: validate(deleteMultipleSchema)
 };
