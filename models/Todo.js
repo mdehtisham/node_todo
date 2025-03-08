@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// models/Todo.js
 const todoSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -12,6 +11,11 @@ const todoSchema = new mongoose.Schema({
     completed: {
         type: Boolean,
         default: false
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
     createdAt: {
         type: Date,

@@ -6,6 +6,9 @@ const {
     validateUpdateTodo,
     validateDeleteMultiple
 } = require('../middlewares/validate');
+const auth = require('../middlewares/auth');
+
+router.use(auth);
 
 router.get('/', todoController.getAllTodos);
 router.post('/', validateCreateTodo, todoController.createTodo);
